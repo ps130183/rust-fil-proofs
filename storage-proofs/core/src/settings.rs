@@ -1,3 +1,4 @@
+use std::env;
 use std::sync::Mutex;
 
 use config::{Config, ConfigError, Environment, File};
@@ -41,10 +42,16 @@ impl Default for Settings {
             rows_to_discard: 2,
             sdr_parents_cache_size: 2_048,
             window_post_synthesis_num_cpus: num_cpus::get() as u32,
-            parameter_cache: "/var/tmp/filecoin-proof-parameters/".to_string(),
-            parent_cache: "/var/tmp/filecoin-parents".to_string(),
+            parameter_cache: tmp("filecoin-proof-parameters/"),
+            parent_cache: tmp("filecoin-parents"),
         }
     }
+}
+
+fn tmp(s: &str) -> String {
+    let mut tmp = env::var("TMPDIR").unwrap_or_else(|_| "/var/tmp/".to_string());
+    tmp.push_str(s);
+    tmp
 }
 
 impl Settings {
