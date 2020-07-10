@@ -42,7 +42,7 @@ impl Default for Settings {
             rows_to_discard: 2,
             sdr_parents_cache_size: 2_048,
             window_post_synthesis_num_cpus: num_cpus::get() as u32,
-            parameter_cache: tmp("filecoin-proof-parameters/"),
+            parameter_cache: "/var/tmp/filecoin-proof-parameters/".to_string(),
             parent_cache: tmp("filecoin-parents"),
         }
     }
