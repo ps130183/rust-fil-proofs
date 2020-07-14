@@ -261,6 +261,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
         assert!(layers > 0);
 
         // generate labels
+        info!("------------------------------->>>> start generate_labels")
         let (labels, _) = Self::generate_labels(graph, layer_challenges, replica_id, config)?;
 
         let last_layer_labels = labels.labels_for_last_layer()?;
@@ -309,12 +310,13 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
             None
         };
 
+        info!("-------------->>>>  start  11 ceng  generating layer");
         for layer in 1..=layers {
             info!("generating layer: {}", layer);
             if let Some(ref mut cache) = cache {
                 cache.reset()?;
             }
-
+            info!("----------------->>>>>> graph.size()=======",graph.size());
             if layer == 1 {
                 for node in 0..graph.size() {
                     create_label(

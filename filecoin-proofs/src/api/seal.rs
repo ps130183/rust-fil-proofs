@@ -57,7 +57,7 @@ where
     T: AsRef<Path>,
 {
     info!("seal_pre_commit_phase1:start");
-
+    info!("------------------------->>> my info on seal_pre_commit_phase1:start");
     // Sanity check all input path types.
     ensure!(
         metadata(in_path.as_ref())?.is_file(),
